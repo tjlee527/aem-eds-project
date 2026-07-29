@@ -1,0 +1,30 @@
+/*
+ * brand.css — Design tokens extracted from https://wknd-trendsetters.site/
+ * Generated during design migration. Imported first by styles.css.
+ */
+
+:root {
+  /* fonts */
+  --heading-font-family: "Syncopate", sans-serif;
+  --body-font-family: "Instrument Sans", sans-serif;
+
+  /* colors */
+  --background-color: #fff;
+  --text-color: #000;
+  --link-color: #666;
+  --link-hover-color: #000;
+  --light-color: #f5f5f5;
+  --dark-color: #000;
+
+  /* heading sizes (desktop) */
+  --heading-size-xxl: 56px;
+  --heading-size-xl: 40px;
+  --heading-size-l: 24px;
+  --heading-size-m: 20px;
+  --heading-size-s: 18px;
+  --heading-size-xs: 16px;
+
+  /* spacing */
+  --section-padding: 128px;
+  --content-max-width: 1200px;
+}

@@ -1,0 +1,76 @@
+{
+  "metadata": {
+    "projectType": "doc"
+  },
+  "templates": [
+    {
+      "name": "homepage",
+      "urls": [
+        "https://wknd-trendsetters.site/"
+      ],
+      "representativeUrl": "https://wknd-trendsetters.site/",
+      "coverageGaps": [],
+      "description": "WKND Trendsetters fashion blog homepage with hero, featured article, image gallery, testimonials tabs, latest articles cards, FAQ accordion, and CTA banner",
+      "blocks": [
+        {
+          "name": "section-intro",
+          "instances": [
+            "#main-content > header.section.secondary-section"
+          ],
+          "section": "secondary"
+        },
+        {
+          "name": "columns-media",
+          "instances": [
+            "#main-content > header.section.secondary-section div.grid-layout.tablet-1-column.grid-gap-xxl",
+            "#main-content > section.section:nth-of-type(1) div.grid-layout"
+          ]
+        },
+        {
+          "name": "section-gallery",
+          "instances": [
+            "#main-content > section.section.secondary-section:nth-of-type(2)"
+          ],
+          "section": "secondary"
+        },
+        {
+          "name": "cards-gallery",
+          "instances": [
+            "#main-content > section.section.secondary-section:nth-of-type(2) div.grid-layout.desktop-4-column.grid-gap-sm"
+          ]
+        },
+        {
+          "name": "tabs-testimonial",
+          "instances": [
+            "#main-content > section.section:nth-of-type(3) div.tabs-wrapper"
+          ]
+        },
+        {
+          "name": "section-articles",
+          "instances": [
+            "#main-content > section.section.secondary-section:nth-of-type(4)"
+          ],
+          "section": "secondary"
+        },
+        {
+          "name": "cards-article",
+          "instances": [
+            "#main-content > section.section.secondary-section:nth-of-type(4) div.grid-layout.desktop-4-column.grid-gap-md"
+          ]
+        },
+        {
+          "name": "accordion-faq",
+          "instances": [
+            "#main-content > section.section:nth-of-type(5) div.faq-list"
+          ]
+        },
+        {
+          "name": "hero-banner",
+          "instances": [
+            "#main-content > section.section.inverse-section"
+          ]
+        }
+      ]
+    }
+  ]
+}
