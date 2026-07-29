@@ -353,3 +353,10 @@ main .section.dark a:any-link {
     padding: 96px 0;
   }
 }
+
+/* centered section intros — the heading + subtitle that introduce the
+   gallery and article-card grids are center-aligned on the source site */
+main .default-content-wrapper:has(+ .cards-gallery-wrapper),
+main .default-content-wrapper:has(+ .cards-article-wrapper) {
+  text-align: center;
+}
