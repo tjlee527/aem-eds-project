@@ -1,3 +1,5 @@
+@import url('brand.css');
+
 /*
  * Copyright 2020 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -11,30 +13,30 @@
  */
 
 :root {
-  /* colors */
-  --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  /* colors (see brand.css for source-extracted tokens) */
+  --background-color: #fff;
+  --light-color: #f5f5f5;
+  --dark-color: #000;
+  --text-color: #000;
+  --link-color: #666;
+  --link-hover-color: #000;
 
   /* fonts */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  --body-font-family: "Instrument Sans", instrument-sans-fallback, sans-serif;
+  --heading-font-family: "Syncopate", syncopate-fallback, sans-serif;
 
   /* body sizes */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 19px;
-  --body-font-size-xs: 17px;
+  --body-font-size-m: 18px;
+  --body-font-size-s: 16px;
+  --body-font-size-xs: 14px;
 
-  /* heading sizes */
-  --heading-font-size-xxl: 55px;
-  --heading-font-size-xl: 44px;
-  --heading-font-size-l: 34px;
-  --heading-font-size-m: 27px;
-  --heading-font-size-s: 24px;
-  --heading-font-size-xs: 22px;
+  /* heading sizes (mobile-first) */
+  --heading-font-size-xxl: 36px;
+  --heading-font-size-xl: 30px;
+  --heading-font-size-l: 22px;
+  --heading-font-size-m: 20px;
+  --heading-font-size-s: 18px;
+  --heading-font-size-xs: 16px;
 
   /* nav height */
   --nav-height: 64px;
@@ -42,31 +44,26 @@
 
 /* fallback fonts */
 @font-face {
-  font-family: roboto-condensed-fallback;
-  size-adjust: 88.82%;
+  font-family: syncopate-fallback;
+  size-adjust: 130%;
   src: local('Arial');
 }
 
 @font-face {
-  font-family: roboto-fallback;
-  size-adjust: 99.529%;
+  font-family: instrument-sans-fallback;
+  size-adjust: 100%;
   src: local('Arial');
 }
 
 @media (width >= 900px) {
   :root {
-    /* body sizes */
-    --body-font-size-m: 18px;
-    --body-font-size-s: 16px;
-    --body-font-size-xs: 14px;
-
-    /* heading sizes */
-    --heading-font-size-xxl: 45px;
-    --heading-font-size-xl: 36px;
-    --heading-font-size-l: 28px;
-    --heading-font-size-m: 22px;
-    --heading-font-size-s: 20px;
-    --heading-font-size-xs: 18px;
+    /* heading sizes (desktop, from source) */
+    --heading-font-size-xxl: 56px;
+    --heading-font-size-xl: 40px;
+    --heading-font-size-l: 24px;
+    --heading-font-size-m: 20px;
+    --heading-font-size-s: 18px;
+    --heading-font-size-xs: 16px;
   }
 }
 
@@ -78,6 +75,7 @@ body {
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
 body.appear {
@@ -107,12 +105,17 @@ h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
-  font-weight: 600;
-  line-height: 1.25;
+  font-weight: 700;
+  line-height: 1.1;
+  text-transform: uppercase;
   scroll-margin: 40px;
 }
 
-h1 { font-size: var(--heading-font-size-xxl); }
+h1 {
+  font-size: var(--heading-font-size-xxl);
+  letter-spacing: -0.02em;
+}
+
 h2 { font-size: var(--heading-font-size-xl); }
 h3 { font-size: var(--heading-font-size-l); }
 h4 { font-size: var(--heading-font-size-m); }
@@ -178,13 +181,15 @@ button.button {
   justify-content: center;
   max-width: 100%;
   margin: 0;
-  border: 2px solid transparent;
-  border-radius: 2.4em;
-  padding: 0.5em 1.2em;
+  border: 2px solid var(--text-color);
+  border-radius: 9999px;
+  padding: 12px 24px;
   font: inherit;
-  font-weight: 500;
+  font-size: var(--body-font-size-xs);
+  font-weight: 600;
   line-height: 1.25;
   text-decoration: none;
+  text-transform: none;
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -297,11 +302,11 @@ main img {
 
 /* sections */
 main > .section {
-  margin: 40px 0;
+  margin: 64px 0;
 }
 
 main > .section > div {
-  max-width: 1200px;
+  max-width: var(--content-max-width);
   margin: auto;
   padding: 0 24px;
 }
@@ -311,15 +316,40 @@ main > .section:first-of-type {
 }
 
 @media (width >= 900px) {
+  main > .section {
+    margin: 128px 0;
+  }
+
   main > .section > div {
     padding: 0 32px;
   }
 }
 
-/* section metadata */
+/* section metadata / background variants */
+main .section.secondary,
 main .section.light,
 main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
-  padding: 40px 0;
+  padding: 64px 0;
+}
+
+main .section.dark {
+  background-color: var(--dark-color);
+  color: #fff;
+  margin: 0;
+  padding: 64px 0;
+}
+
+main .section.dark a:any-link {
+  color: #fff;
+}
+
+@media (width >= 900px) {
+  main .section.secondary,
+  main .section.light,
+  main .section.highlight,
+  main .section.dark {
+    padding: 96px 0;
+  }
 }

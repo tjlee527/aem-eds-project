@@ -1,0 +1,52 @@
+/* Block: cards-gallery -- image-only photo gallery
+   Values extracted from source computed styles:
+   grid 4 cols, gap 12px, square cells (aspect-ratio 1/1),
+   border-radius 20px, overflow hidden, img object-fit cover. */
+
+.cards-gallery > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.cards-gallery > ul > li {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.cards-gallery .cards-gallery-card-image {
+  line-height: 0;
+  height: 100%;
+}
+
+.cards-gallery .cards-gallery-card-image picture,
+.cards-gallery .cards-gallery-card-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* the authored second cell is empty in this gallery */
+.cards-gallery .cards-gallery-card-body {
+  display: none;
+}
+
+/* tablet: 2 columns */
+@media (width >= 600px) {
+  .cards-gallery > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* desktop: 4 columns */
+@media (width >= 900px) {
+  .cards-gallery > ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

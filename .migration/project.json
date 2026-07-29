@@ -1,0 +1,10 @@
+{
+  "type": "doc",
+  "sites": {
+    "aem-eds-project": {
+      "previewOrg": "tjlee527",
+      "previewSite": "aem-eds-project",
+      "libraryUrl": "https://main--sta-boilerplate--aemdemos.aem.page/tools/sidekick/library.json"
+    }
+  }
+}

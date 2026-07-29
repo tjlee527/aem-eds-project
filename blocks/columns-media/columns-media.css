@@ -1,0 +1,107 @@
+/* Block: columns-media
+ * Two-column media + text block. Supports two layouts extracted from source:
+ *   - intro: text (h1 + copy + 2 pill CTAs) beside a 2-col image mosaic (3 images)
+ *   - article header: single large image beside heading + byline
+ * Values come from source computed styles (wknd-trendsetters.site).
+ */
+
+/* --- Row layout (mobile-first: stacked) --- */
+.columns-media > div {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* --- Images --- */
+.columns-media picture {
+  display: block;
+}
+
+.columns-media img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* --- Intro CTAs (both links live in one paragraph) --- */
+.columns-media > div > div > p:has(a) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+/* Intro image mosaic: the paragraph holding multiple pictures becomes a grid.
+ * Mobile = single column; desktop = 2 columns (3rd image wraps to bottom-left). */
+.columns-media .columns-media-img-col p:has(picture + picture) {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin: 0;
+}
+
+.columns-media > div > div > p > a:any-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border: 2px solid var(--text-color);
+  border-radius: 9999px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* first CTA = primary (filled) */
+.columns-media > div > div > p > a:any-link:first-child {
+  background-color: var(--text-color);
+  color: var(--background-color);
+}
+
+/* second CTA = secondary (outline) */
+.columns-media > div > div > p > a:any-link:last-child {
+  background-color: transparent;
+  color: var(--text-color);
+}
+
+.columns-media > div > div > p > a:any-link:first-child:hover {
+  background-color: var(--dark-color);
+  color: var(--background-color);
+  text-decoration: none;
+}
+
+.columns-media > div > div > p > a:any-link:last-child:hover {
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  text-decoration: none;
+}
+
+/* --- Desktop: side-by-side two columns --- */
+@media (width >= 900px) {
+  .columns-media > div {
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+  }
+
+  /* intro layout uses a wider gap between text and image mosaic */
+  .columns-media > div:has(h1) {
+    gap: 64px;
+  }
+
+  .columns-media > div > div {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* intro image mosaic becomes a 2-column grid */
+  .columns-media .columns-media-img-col p:has(picture + picture) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
