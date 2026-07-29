@@ -14,6 +14,7 @@ export default async function decorate(block) {
 
   block.textContent = '';
   const footer = document.createElement('div');
+  footer.className = 'footer-grid';
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
 
   // label sections: first section (logo + social list) is the brand column;
