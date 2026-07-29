@@ -1,20 +1,117 @@
+/* WKND Trendsetters footer — inverse (dark), values from source computed styles */
+
 footer {
-  background-color: var(--light-color);
+  background-color: #000;
+  color: #fff;
   font-size: var(--body-font-size-xs);
 }
 
-footer .footer > div {
+footer .footer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  max-width: var(--content-max-width, 1200px);
   margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
+  padding: 64px 24px;
 }
 
 footer .footer p {
   margin: 0;
 }
 
+footer .footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* brand column */
+footer .footer-brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-family: var(--heading-font-family);
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+footer .footer-brand img {
+  width: 33px;
+  height: 33px;
+}
+
+/* social icons row */
+footer .footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+footer .footer-social img {
+  width: 16px;
+  height: 16px;
+}
+
+/* link columns */
+footer .footer-links p:first-of-type {
+  margin-bottom: 16px;
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #999;
+}
+
+footer .footer-links li {
+  margin-bottom: 12px;
+}
+
+/* link base styles (grouped before hover states for specificity ordering) */
+footer .footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 10%);
+  color: #fff;
+  transition: background-color 0.2s ease;
+}
+
+footer .footer-links a {
+  color: #999;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+footer .footer-social a:hover {
+  background: rgb(255 255 255 / 25%);
+}
+
+footer .footer-links a:hover {
+  color: #fff;
+}
+
+/* tablet: 2 columns */
+@media (width >= 600px) {
+  footer .footer {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* desktop: wider brand column + 3 link columns */
 @media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
+  footer .footer {
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 32px;
+    padding: 80px 32px;
   }
 }
