@@ -82,16 +82,17 @@ body.appear {
   display: block;
 }
 
-header {
+/* the site nav header only (not content <header> sections inside main) */
+body > header {
   height: var(--nav-height);
 }
 
-header .header,
+body > header .header,
 footer .footer {
   visibility: hidden;
 }
 
-header .header[data-block-status="loaded"],
+body > header .header[data-block-status="loaded"],
 footer .footer[data-block-status="loaded"] {
   visibility: visible;
 }
@@ -311,7 +312,7 @@ main > .section > div {
   padding: 0 24px;
 }
 
-main > .section:first-of-type {
+main > .section:first-child {
   margin-top: 0;
 }
 
@@ -345,11 +346,20 @@ main .section.dark a:any-link {
   color: #fff;
 }
 
+/* alternating grey bands: every other section (odd) gets the grey
+   background, except the hero banner which has its own dark treatment */
+main > .section:nth-child(odd):not(.hero-banner-container) {
+  background-color: var(--light-color);
+  margin: 0;
+  padding: 64px 0;
+}
+
 @media (width >= 900px) {
   main .section.secondary,
   main .section.light,
   main .section.highlight,
-  main .section.dark {
+  main .section.dark,
+  main > .section:nth-child(odd):not(.hero-banner-container) {
     padding: 96px 0;
   }
 }

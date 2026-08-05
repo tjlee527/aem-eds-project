@@ -143,6 +143,22 @@ function decorateButtons(main) {
 }
 
 /**
+ * Promotes the first section to a semantic <header> element.
+ * The source site renders its intro section as <header class="section ...">;
+ * EDS decorates sections as <div>, so swap the wrapper tag while preserving
+ * all classes, attributes, and children.
+ * @param {Element} main The main element
+ */
+function promoteFirstSectionToHeader(main) {
+  const first = main.querySelector(':scope > .section');
+  if (!first || first.tagName === 'HEADER') return;
+  const header = document.createElement('header');
+  [...first.attributes].forEach((attr) => header.setAttribute(attr.name, attr.value));
+  while (first.firstChild) header.append(first.firstChild);
+  first.replaceWith(header);
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -153,6 +169,7 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
+  promoteFirstSectionToHeader(main);
 }
 
 /**
