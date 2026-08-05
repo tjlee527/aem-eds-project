@@ -82,16 +82,17 @@ body.appear {
   display: block;
 }
 
-header {
+/* the site nav header only (not content <header> sections inside main) */
+body > header {
   height: var(--nav-height);
 }
 
-header .header,
+body > header .header,
 footer .footer {
   visibility: hidden;
 }
 
-header .header[data-block-status="loaded"],
+body > header .header[data-block-status="loaded"],
 footer .footer[data-block-status="loaded"] {
   visibility: visible;
 }
