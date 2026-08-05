@@ -305,8 +305,9 @@ header nav .nav-sections .nav-drop-mega > ul > li:last-child a img {
     padding: 8px 4px;
   }
 
-  /* megamenu (Trends): multi-column grid */
-  header nav .nav-sections .nav-drop-mega > ul {
+  /* megamenu (Trends): multi-column grid — only laid out when open;
+     the closed state stays display:none from the base rule above */
+  header nav .nav-sections .nav-drop-mega[aria-expanded='true'] > ul {
     display: flex;
     gap: 32px;
     width: max-content;

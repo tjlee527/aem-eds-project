@@ -33,13 +33,21 @@
   margin-top: 32px;
 }
 
-/* Intro image mosaic: the paragraph holding multiple pictures becomes a grid.
- * Mobile = single column; desktop = 2 columns (3rd image wraps to bottom-left). */
-.columns-media .columns-media-img-col p:has(picture + picture) {
+/* Intro image mosaic: the column holds 3 images, each in its own <p>.
+ * Mobile = single column; desktop = 2-column grid (3rd image wraps to
+ * bottom-left), matching the source collage. */
+.columns-media .columns-media-img-mosaic {
   display: grid;
   grid-template-columns: 1fr;
   gap: 8px;
+}
+
+.columns-media .columns-media-img-mosaic p {
   margin: 0;
+}
+
+.columns-media .columns-media-img-mosaic img {
+  aspect-ratio: 3 / 2;
 }
 
 .columns-media > div > div > p > a:any-link {
@@ -100,8 +108,8 @@
     min-width: 0;
   }
 
-  /* intro image mosaic becomes a 2-column grid */
-  .columns-media .columns-media-img-col p:has(picture + picture) {
+  /* intro image mosaic becomes a 2-column grid (3rd image wraps to bottom-left) */
+  .columns-media .columns-media-img-mosaic {
     grid-template-columns: 1fr 1fr;
   }
 }
