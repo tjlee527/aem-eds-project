@@ -160,8 +160,10 @@ function rewrapSection(el, tag) {
 /**
  * Promotes EDS section wrappers to semantic elements: the first section
  * becomes a <header> (the source's intro), and every other section becomes a
- * <section>. EDS core logic keys off the `.section` class (not the tag), so
- * the class is preserved and all styling/loading continues to work.
+ * <section>. Must run AFTER loadSections() — aem.js loads and reveals sections
+ * via tag-specific `div.section` selectors (and hides them inline until then),
+ * so swapping the tag earlier would leave sections hidden. The `.section` class
+ * is preserved, so all styling continues to apply.
  * @param {Element} main The main element
  */
 function decorateSectionTags(main) {
@@ -182,7 +184,6 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
-  decorateSectionTags(main);
 }
 
 /**
@@ -218,6 +219,10 @@ async function loadLazy(doc) {
 
   const main = doc.querySelector('main');
   await loadSections(main);
+
+  // sections are now loaded/revealed; upgrade their wrapper tags to semantic
+  // <header> (first) and <section> (rest) for accessibility/structure
+  decorateSectionTags(main);
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
