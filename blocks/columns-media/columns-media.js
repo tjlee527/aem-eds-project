@@ -13,6 +13,11 @@ export default function decorate(block) {
           picWrapper.classList.add('columns-media-img-col');
         }
       }
+      // a column holding multiple images (each in its own <p>) is the
+      // intro's photo mosaic — tag it so CSS can lay it out as a grid
+      if (col.querySelectorAll('img').length > 1) {
+        col.classList.add('columns-media-img-mosaic');
+      }
     });
   });
 
