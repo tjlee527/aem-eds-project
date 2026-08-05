@@ -23,10 +23,24 @@
   background-color: var(--background-color);
   color: var(--text-color);
   text-decoration: none;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
+/* lift + drop shadow on hover, matching the source */
 .cards-article .cards-article-card-link:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 10%);
   text-decoration: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cards-article .cards-article-card-link {
+    transition: box-shadow 0.3s;
+  }
+
+  .cards-article .cards-article-card-link:hover {
+    transform: none;
+  }
 }
 
 .cards-article .cards-article-card-image {
