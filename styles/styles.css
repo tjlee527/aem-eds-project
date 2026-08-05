@@ -311,7 +311,7 @@ main > .section > div {
   padding: 0 24px;
 }
 
-main > .section:first-of-type {
+main > .section:first-child {
   margin-top: 0;
 }
 
