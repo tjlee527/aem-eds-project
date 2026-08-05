@@ -20,7 +20,9 @@
   border: 1px solid #e8e8e8;
   border-radius: 20px;
   overflow: hidden;
-  background-color: var(--background-color);
+
+  /* transparent so the card blends into its section background (matches source) */
+  background-color: transparent;
   color: var(--text-color);
   text-decoration: none;
   transition: transform 0.3s, box-shadow 0.3s;
