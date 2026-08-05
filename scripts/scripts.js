@@ -143,19 +143,34 @@ function decorateButtons(main) {
 }
 
 /**
- * Promotes the first section to a semantic <header> element.
- * The source site renders its intro section as <header class="section ...">;
- * EDS decorates sections as <div>, so swap the wrapper tag while preserving
- * all classes, attributes, and children.
+ * Swaps a section wrapper's tag while preserving classes, attributes, children.
+ * @param {Element} el The section element to rewrap
+ * @param {string} tag The target tag name (e.g. 'header', 'section')
+ * @returns {Element} the new element
+ */
+function rewrapSection(el, tag) {
+  if (el.tagName === tag.toUpperCase()) return el;
+  const replacement = document.createElement(tag);
+  [...el.attributes].forEach((attr) => replacement.setAttribute(attr.name, attr.value));
+  while (el.firstChild) replacement.append(el.firstChild);
+  el.replaceWith(replacement);
+  return replacement;
+}
+
+/**
+ * Promotes EDS section wrappers to semantic elements: the first section
+ * becomes a <header> (the source's intro), and every other section becomes a
+ * <section>. Must run AFTER loadSections() — aem.js loads and reveals sections
+ * via tag-specific `div.section` selectors (and hides them inline until then),
+ * so swapping the tag earlier would leave sections hidden. The `.section` class
+ * is preserved, so all styling continues to apply.
  * @param {Element} main The main element
  */
-function promoteFirstSectionToHeader(main) {
-  const first = main.querySelector(':scope > .section');
-  if (!first || first.tagName === 'HEADER') return;
-  const header = document.createElement('header');
-  [...first.attributes].forEach((attr) => header.setAttribute(attr.name, attr.value));
-  while (first.firstChild) header.append(first.firstChild);
-  first.replaceWith(header);
+function decorateSectionTags(main) {
+  const sections = [...main.querySelectorAll(':scope > .section')];
+  sections.forEach((section, i) => {
+    rewrapSection(section, i === 0 ? 'header' : 'section');
+  });
 }
 
 /**
@@ -169,7 +184,6 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
-  promoteFirstSectionToHeader(main);
 }
 
 /**
@@ -205,6 +219,10 @@ async function loadLazy(doc) {
 
   const main = doc.querySelector('main');
   await loadSections(main);
+
+  // sections are now loaded/revealed; upgrade their wrapper tags to semantic
+  // <header> (first) and <section> (rest) for accessibility/structure
+  decorateSectionTags(main);
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
