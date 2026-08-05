@@ -258,6 +258,16 @@ var CustomImportScript = (() => {
       }
     ]
   };
+  function insertSectionBreaks(main, document) {
+    const container = document.querySelector("#main-content") || main;
+    const sections = Array.from(container.children).filter(
+      (el) => /^(header|section)$/i.test(el.tagName) && el.classList.contains("section")
+    );
+    sections.slice(0, -1).forEach((section) => {
+      const hr = document.createElement("hr");
+      section.after(hr);
+    });
+  }
   function executeTransformers(hookName, element, payload) {
     const enhancedPayload = __spreadProps(__spreadValues({}, payload), { template: PAGE_TEMPLATE });
     transformers.forEach((transformerFn) => {
@@ -300,6 +310,7 @@ var CustomImportScript = (() => {
       } = payload;
       const main = document.body;
       executeTransformers("beforeTransform", main, payload);
+      insertSectionBreaks(main, document);
       const pageBlocks = findBlocksOnPage(document, PAGE_TEMPLATE);
       pageBlocks.forEach((block) => {
         if (!block.element.parentNode) return;

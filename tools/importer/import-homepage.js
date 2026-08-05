@@ -79,6 +79,31 @@ const PAGE_TEMPLATE = {
 };
 
 /**
+ * Insert EDS section breaks (<hr>) between the source's section-level wrappers.
+ *
+ * The source page groups content into 7 sections (1 <header> + 6 <section>,
+ * each carrying `class="section ..."`) under #main-content. Block parsing
+ * only replaces the inner grid/block markup, so these wrappers survive but
+ * render as a single EDS section (only <hr> creates a section boundary).
+ * Emitting an <hr> after each wrapper (except the last) yields one EDS
+ * section per source section, so the first becomes the intro and the rest
+ * follow as their own sections.
+ * @param {Element} main - The container element (document.body)
+ * @param {Document} document - The DOM document
+ */
+function insertSectionBreaks(main, document) {
+  const container = document.querySelector('#main-content') || main;
+  const sections = Array.from(container.children).filter(
+    (el) => /^(header|section)$/i.test(el.tagName) && el.classList.contains('section'),
+  );
+  // Insert a break after every section except the last.
+  sections.slice(0, -1).forEach((section) => {
+    const hr = document.createElement('hr');
+    section.after(hr);
+  });
+}
+
+/**
  * Execute all page transformers for a specific hook
  * @param {string} hookName - 'beforeTransform' or 'afterTransform'
  * @param {Element} element - The DOM element to transform
@@ -136,6 +161,12 @@ export default {
 
     // 1. Execute beforeTransform transformers (initial cleanup)
     executeTransformers('beforeTransform', main, payload);
+
+    // 1b. Insert section breaks now, while all 7 source section wrappers still
+    // exist. Some parsers (e.g. hero-banner) replace their entire section
+    // wrapper with the block, so a break inserted after parsing would be lost
+    // and that block would merge into the previous section.
+    insertSectionBreaks(main, document);
 
     // 2. Find blocks on page using embedded template
     const pageBlocks = findBlocksOnPage(document, PAGE_TEMPLATE);
