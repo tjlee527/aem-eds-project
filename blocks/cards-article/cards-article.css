@@ -20,13 +20,29 @@
   border: 1px solid #e8e8e8;
   border-radius: 20px;
   overflow: hidden;
-  background-color: var(--background-color);
+
+  /* transparent so the card blends into its section background (matches source) */
+  background-color: transparent;
   color: var(--text-color);
+  text-decoration: none;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* lift + drop shadow on hover, matching the source */
+.cards-article .cards-article-card-link:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 10%);
   text-decoration: none;
 }
 
-.cards-article .cards-article-card-link:hover {
-  text-decoration: none;
+@media (prefers-reduced-motion: reduce) {
+  .cards-article .cards-article-card-link {
+    transition: box-shadow 0.3s;
+  }
+
+  .cards-article .cards-article-card-link:hover {
+    transform: none;
+  }
 }
 
 .cards-article .cards-article-card-image {
